@@ -10,24 +10,24 @@
 ###############################################################################
 # Write f01 that prints "Hello World!" and calls f02. (three lines)
 def f01():
-
+    print("Hello World!")
     f02()
 
 
 ###############################################################################
 # Write f02 that sets the variables x, y, and z equal to the words
 # necessary to have the f03 print "i love python!" (five lines)
-
-
-
-
+def f02(x, y, z):
+    x = "i"
+    y = "love"
+    z = "python"
     f03(x, y, z)  # Last line in f2()
 
 
 ###############################################################################
 # Finish f03 (replace the ????).
 def f03(*words):
-    truth = " ".????(words)  # This is broken.
+    truth = " ".join(words)  # This is broken.
     truth_emphasized = truth + "!"
     print(truth_emphasized)
     f04(truth)  # Last line in f03()
@@ -37,7 +37,7 @@ def f03(*words):
 # Write f04 that prints truth backwards (edit one line only)
 # Ex. f4("Littlest Bear") prints "raeB tselttiL"
 def f04(string):
-
+    string = string[::-1]
     f05(string)  # Last line in f04()
 
 
@@ -51,10 +51,10 @@ def f04(string):
 #   Info
 #    Info
 def f05(word):
-
-
-
-
+    indent = ""
+    for letter in word:
+        print(indent + word)
+        indent += " "
 
     f06("South Hall", "Python Rocks!")  # Last line in f05()
 
@@ -71,13 +71,11 @@ def f05(word):
 # 'longer_string' is longer than 'short_string' by 1 chars
 # 'short_string' has only 92.31% the number of chars of longer_string
 def f06(string1, string2):
-
-
-
-
-
-
-
+    string2_len = len(list(string2))
+    string1_len = len(list(string1))
+    chars_longer = string2_len - string1_len
+    print("{} is longer than {} by {} chars".format(string2, string1, chars_longer))
+    print("{} has only {:.2%} the number of chars of {}".format(string1, string1_len/string2_len, string2))
     various_solutions()  # Last line in f06()
 
 
@@ -113,34 +111,54 @@ def various_solutions():
 
 ###############################################################################
 def f07():
-    ...
-
+    multiples_sum = 0
+    n = 1
+    while n < 500:
+        if n % 3 == 0 or n % 5 == 0:
+            multiples_sum += n
+            n += 1
+        else:
+            n += 1
+    return multiples_sum
 
 ###############################################################################
 def f08():
-    ...
+    multiples_sum = 0    
+    for n in range(1, 500):
+        if n % 3 == 0 or n % 5 == 0:
+            multiples_sum += n
+    return multiples_sum
 
 
 ###############################################################################
 def f09():
-    ...
-
+    multiples_sum = sum([n for n in range(1, 500) if n % 3 == 0 or n % 5 == 0])
+    return multiples_sum
 
 ###############################################################################
-def f10():
+def f10(n):
+    # while n < 500:
+    #     if n % 3 == 0 or n % 5 == 0:
+    #         return (n + f10(n+1))
+    #     else:
+    #         return f10(n+1)
     ...
-
+#CANT FIGURE IT OUT
 
 ###############################################################################
 # Write f11() to take arguments, printing them as floats if they started as
 # strings, integers if they started as floats, and as the value 0 if they
 # started as ints.
 def f11(args):
-    ...
-
+    if type(args) == str:
+        print(float(args))
+    if type(args) == float:
+        print(int(args))
+    if type(args) == int:
+        print(0)
 
 ###############################################################################
-# Write f12() to ask for raw_input from the user. Change the input to a float.
+# Write f12() to ask for input from the user. Change the input to a float.
 # Create log_file.txt to log the input that cannot be changed to a float.
 #   - write one faulty input per line
 # Print, as a list, all converted input.
@@ -152,12 +170,19 @@ def f11(args):
 # Ex. printing
 #   [1.0, 1.3, 2.443]
 def f12():
-    ...
-
-
-
-
-
+    user_input = ""
+    list_inputs = []
+    while user_input != "done":
+        user_input = input("Input ")
+        try:
+            user_input_float = float(user_input)
+        except:
+            with open("log_file.txt", "a") as fout:
+                fout.write(user_input)
+                #stopped here, trying to figure out how to append instead of overwrite
+        else:
+            list_inputs.append(user_input_float)
+            print(list_inputs)
     f13()  # Last line in f12()
 
 
